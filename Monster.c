@@ -6,36 +6,36 @@
 #include "Player.h"
 #include "Random.h"
 
-static double MonsterHealth;
-static double MonsterHealthMax;
-static double MonsterMana;
-static double MonsterManaMax;
-static double MonsterDamageMin;
-static double MonsterDamageMax;
+static int MonsterHealth;
+static int MonsterHealthMax;
+static int MonsterMana;
+static int MonsterManaMax;
+static int MonsterDamageMin;
+static int MonsterDamageMax;
 static double MonsterSpeedAttack;
-static double MonsterMinMagicDmg;
-static double MonsterMaxMagicDmg;
+static int MonsterMinMagicDmg;
+static int MonsterMaxMagicDmg;
 static int MonsterCoinDropMin;
 static int MonsterCoinDropMax;
 static int MonsterExpMin;
 static int MonsterExpMax;
 static int MonsterLevel;
 static char *MonsterNameOfTheMonster;
-static double MonsterDeffence;
-static double MonsterResistance;
+static int MonsterDeffence;
+static int MonsterResistance;
 
 //SETTERS
-void set_MonsterHealth(double current, double max){
+void set_MonsterHealth(int current, int max){
     MonsterHealth = current;
     MonsterHealthMax = max;
 }
 
-void set_MonsterMana(double current, double max){
+void set_MonsterMana(int current, int max){
     MonsterMana = current;
     MonsterManaMax = max;
 }
 
-void set_MonsterDamage(double min, double max){
+void set_MonsterDamage(int min, int max){
     MonsterDamageMin = min;
     MonsterDamageMax = max;
 }
@@ -44,7 +44,7 @@ void set_MonsterSpeedAttack(double addSpeedAttack){
     MonsterSpeedAttack += addSpeedAttack;
 }
 
-void set_MonsterMagicDamage(double min, double max){
+void set_MonsterMagicDamage(int min, int max){
     MonsterMinMagicDmg = min;
     MonsterMaxMagicDmg = max;
 }
@@ -67,36 +67,36 @@ void set_MonsterNameOfTheMonster(char *name){
     MonsterNameOfTheMonster = name;
 }
 
-void set_MonsterDeffence(double addDefence){
+void set_MonsterDeffence(int addDefence){
     MonsterDeffence += addDefence;
 }
 
-void set_MonsterResistance(double addResistance){
+void set_MonsterResistance(int addResistance){
     MonsterResistance += addResistance;
 }
 
 //GETTERS
-double get_MonsterHealth(){
+int get_MonsterHealth(){
     return MonsterHealth;
 }
 
-double get_MonsterHealthMax(){
+int get_MonsterHealthMax(){
     return MonsterHealthMax;
 }
 
-double get_MonsterMana(){
+int get_MonsterMana(){
     return MonsterMana;
 }
 
-double get_MonsterManaMax(){
+int get_MonsterManaMax(){
     return MonsterManaMax;
 }
 
-double get_MonsterDamageMin(){
+int get_MonsterDamageMin(){
     return MonsterDamageMin;
 }
 
-double get_MonsterDamageMax(){
+int get_MonsterDamageMax(){
     return MonsterDamageMax;
 }
 
@@ -104,11 +104,11 @@ double get_MonsterSpeedAttack(){
     return MonsterSpeedAttack;
 }
 
-double get_MonsterMinMagicDmg(){
+int get_MonsterMinMagicDmg(){
     return MonsterMinMagicDmg;
 }
 
-double get_MonsterMaxMagicDmg(){
+int get_MonsterMaxMagicDmg(){
     return MonsterMaxMagicDmg;
 }
 
@@ -132,15 +132,15 @@ int get_MonsterLevel(){
     return MonsterLevel;
 }
 
-char get_MonsterNameOfTheMonster(){
-    return *MonsterNameOfTheMonster;
+char *get_MonsterNameOfTheMonster(){
+    return MonsterNameOfTheMonster;
 }
 
-double get_MonsterDeffence(){
+int get_MonsterDeffence(){
     return MonsterDeffence;
 }
 
-double get_MonsterResistance(){
+int get_MonsterResistance(){
     return MonsterResistance;
 }
 
@@ -148,15 +148,15 @@ void die(){
     int coin = RInt(MonsterCoinDropMin, MonsterCoinDropMax);
     int exp = RInt(MonsterExpMin, MonsterExpMax);
 
-    printf("Pokonales przeciwnika, otrzymujesz: %d pieniedzy i %d punktow doswiadczenian\n", coin, exp);
+    printf("Pokonales przeciwnika, otrzymujesz: %d monet i %d punktow doswiadczenian\n", coin, exp);
     set_PlayerMoney(coin);
     set_PlayerExp(exp);
 }
 
-int monsterTakeDamage(double damage){
+int monsterTakeDamage(int damage){
     MonsterHealth -= damage;
-    printf("%c ma teraz: %f / %f punktow zycia\n", *MonsterNameOfTheMonster, MonsterHealth, MonsterHealthMax);
-    if (MonsterHealth < 0){
+    printf("%s ma teraz: %d / %d punktow zycia\n", MonsterNameOfTheMonster, MonsterHealth, MonsterHealthMax);
+    if (MonsterHealth <= 0){
         die();
         return 1;
     }
@@ -165,9 +165,9 @@ int monsterTakeDamage(double damage){
     }
 }
 
-void monsterPhysicAttack(double damageMin, double damageMax){
-    double damage = RInt((int)damageMin, (int)damageMax);
-    printf("%c zadal Ci: %f punktow obrazen!\n", *MonsterNameOfTheMonster, damage);
+void monsterPhysicAttack(int damageMin, int damageMax){
+    int damage = RInt(damageMin, damageMax);
+    printf("%s zadal Ci: %d punktow obrazen!\n", MonsterNameOfTheMonster, damage);
     set_PlayerHealth(get_PlayerHealth() - damage, get_PlayerHealthMax());
 }
 

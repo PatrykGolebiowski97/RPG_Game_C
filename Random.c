@@ -17,11 +17,11 @@ int Crit(){
     int chance = RInt(1,get_PlayerCrit());
     int possibilities = RInt(1, 100);
     if (possibilities <= chance){
-        printf("cryt siadł, szansa: %d > możliwości: %d\n", chance, possibilities);
+        printf("Krytyk siadł, szansa: %d > możliwości: %d\n", chance, possibilities);
         return 1;
     }
     else {
-        printf("cryt nie siadł, szansa: %d < możliwości: %d\n", chance, possibilities);
+        printf("Krytyk nie siadł, szansa: %d < możliwości: %d\n", chance, possibilities);
         return 0;
     }
 }

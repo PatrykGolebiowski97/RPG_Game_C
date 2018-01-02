@@ -34,7 +34,7 @@ void continueBattle(){
 
 void startBattle(){
     printf("-------------------------------------------------------------\n");
-    printf("Zostales zaatakowany przez: %c\n", get_MonsterNameOfTheMonster());
+    printf("Zostales zaatakowany przez: %s\n", get_MonsterNameOfTheMonster());
     printf("-------------------------------------------------------------\n");
     continueBattle();
 }

@@ -9,14 +9,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+char choice[100];
+
 
 void Well(){
     printf("Jestes na polnocy\n");
 }
 
 void Camp(){
-    char choice[30];
-    gets(choice);
+    fgets(choice,100,stdin);
+    choice[strlen(choice)-1] = '\0';
 
     if(strcmp(choice, "idz na polnoc") == 0){
         Well();

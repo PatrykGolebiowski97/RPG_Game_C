@@ -7,30 +7,31 @@
 #include <string.h>
 #include "Random.h"
 #include "Monster.h"
+#include "Move.h"
 
-static double PlayerHealth = 100;
-static double PlayerHealthMax = 100;
-static double PlayerMana = 30;
-static double PlayerManaMax = 30;
+static int PlayerHealth = 100;
+static int PlayerHealthMax = 100;
+static int PlayerMana = 30;
+static int PlayerManaMax = 30;
 static double PlayerSpeedAttack = 1.0;
-static double PlayerDeffence = 5;
-static double PlayerAttack = 5;
-static double PlayerMoney = 0;
+static int PlayerDeffence = 5;
+static int PlayerAttack = 5;
+static int PlayerMoney = 0;
 static int PlayerLevel = 1;
-static double PlayerExp = 0;
-static double PlayerAgility = 5;
-static double PlayerIntelligence = 5;
-static double PlayerVitality = 5;
-static double PlayerStrength = 5;
-static double PlayerCrit = 1;
+static int PlayerExp = 0;
+static int PlayerAgility = 5;
+static int PlayerIntelligence = 5;
+static int PlayerVitality = 5;
+static int PlayerStrength = 5;
+static int PlayerCrit = 1;
 
 //SETTERS
-void set_PlayerHealth(double current, double max){
+void set_PlayerHealth(int current, int max){
     PlayerHealth = current;
     PlayerHealthMax = max;
 }
 
-void set_PlayerMana(double current, double max){
+void set_PlayerMana(int current, int max){
     PlayerMana = current;
     PlayerManaMax = max;
 }
@@ -39,15 +40,15 @@ void set_PlayerSpeedAttack(double addSpeedAttack){
     PlayerSpeedAttack += addSpeedAttack;
 }
 
-void set_PlayerDeffence(double addDefence){
+void set_PlayerDeffence(int addDefence){
     PlayerDeffence += addDefence;
 }
 
-void set_PlayerAttack(double addAttack){
+void set_PlayerAttack(int addAttack){
     PlayerAttack += addAttack;
 }
 
-void set_PlayerMoney(double addMoney){
+void set_PlayerMoney(int addMoney){
     PlayerMoney += addMoney;
 }
 
@@ -55,60 +56,60 @@ void set_PlayerLevel(int addLevel){
     PlayerLevel += addLevel;
 }
 
-void set_PlayerExp(double addExp){
+void set_PlayerExp(int addExp){
     PlayerExp += addExp;
 }
 
-void set_PlayerAgility(double addAgility){
+void set_PlayerAgility(int addAgility){
     PlayerAgility += addAgility;
 }
 
-void set_PlayerIntelligence(double addInteligence){
+void set_PlayerIntelligence(int addInteligence){
     PlayerIntelligence += addInteligence;
 }
 
-void set_PlayerVitality(double addVitality){
+void set_PlayerVitality(int addVitality){
     PlayerVitality += addVitality;
 }
 
-void set_PlayerStrength(double addStrength){
+void set_PlayerStrength(int addStrength){
     PlayerStrength += addStrength;
 }
 
-void set_PlayerCrit(double addCrit){
+void set_PlayerCrit(int addCrit){
     PlayerCrit += addCrit;
 }
 
 //GETTERS
-double get_PlayerHealth(){
+int get_PlayerHealth(){
     return PlayerHealth;
 }
 
-double get_PlayerHealthMax(){
+int get_PlayerHealthMax(){
     return PlayerHealthMax;
 }
 
-double get_PlayerMana(){
+int get_PlayerMana(){
     return PlayerMana;
 }
 
-double get_PlayerManaMax(){
+int get_PlayerManaMax(){
     return PlayerManaMax;
 }
 
-double get_PlayerSpeedAttack(){
+int get_PlayerSpeedAttack(){
     return PlayerSpeedAttack;
 }
 
-double get_PlayerDeffence(){
+int get_PlayerDeffence(){
     return PlayerDeffence;
 }
 
-double get_PlayerAttack(){
+int get_PlayerAttack(){
     return PlayerAttack;
 }
 
-double get_PlayerMoney(){
+int get_PlayerMoney(){
     return PlayerMoney;
 }
 
@@ -116,23 +117,23 @@ int get_PlayerLevel() {
     return PlayerLevel;
 }
 
-double get_PlayerExp(){
+int get_PlayerExp(){
     return PlayerExp;
 }
 
-double get_PlayerAgility(){
+int get_PlayerAgility(){
     return PlayerAgility;
 }
 
-double get_PlayerIntelligence(){
+int get_PlayerIntelligence(){
     return PlayerIntelligence;
 }
 
-double get_PlayerVitality(){
+int get_PlayerVitality(){
     return PlayerVitality;
 }
 
-double get_PlayerStrength(){
+int get_PlayerStrength(){
     return PlayerStrength;
 }
 
@@ -140,37 +141,37 @@ double get_PlayerCrit(){
     return PlayerCrit;
 }
 
-double get_PlayerAttackPower(){
+int get_PlayerAttackPower(){
     return PlayerAttack * PlayerStrength;
 }
 
 void get_PlayerStats(){
-    printf("Obecne zdrowie: %.2f\n", PlayerHealth);
-    printf("Maksymalne zdrowie: %.2f\n", PlayerHealthMax);
-    printf("Obecna mana: %.2f\n", PlayerMana);
-    printf("Maksymalna mana: %.2f\n", PlayerManaMax);
+    printf("Obecne zdrowie: %d\n", PlayerHealth);
+    printf("Maksymalne zdrowie: %d\n", PlayerHealthMax);
+    printf("Obecna mana: %d\n", PlayerMana);
+    printf("Maksymalna mana: %d\n", PlayerManaMax);
     printf("Predkosc ataku: %.2f\n", PlayerSpeedAttack);
-    printf("Obrona: %.2f\n", PlayerDeffence);
-    printf("Atak: %.2f\n", PlayerAttack);
+    printf("Obrona: %d\n", PlayerDeffence);
+    printf("Atak: %d\n", PlayerAttack);
     printf("Level: %d\n", PlayerLevel);
-    printf("Exp: %.2f\n", PlayerExp);
-    printf("Zrecznosc: %.2f\n", PlayerAgility);
-    printf("Inteligencja: %.2f\n", PlayerIntelligence);
-    printf("Witalnosc: %.2f\n", PlayerVitality);
-    printf("Sila: %.2f\n", PlayerStrength);
-    printf("Szansa na uderzenie krytyczne: %.2f\n", PlayerCrit);
+    printf("Exp: %d\n", PlayerExp);
+    printf("Zrecznosc: %d\n", PlayerAgility);
+    printf("Inteligencja: %d\n", PlayerIntelligence);
+    printf("Witalnosc: %d\n", PlayerVitality);
+    printf("Sila: %d\n", PlayerStrength);
+    printf("Szansa na uderzenie krytyczne: %d\n", PlayerCrit);
 }
 
 void playerPhysicAttack(){
-    double damage = PlayerAttack * PlayerStrength;
+    int damage = PlayerAttack * PlayerStrength;
 
     if(Crit() == 1){
         damage *= 2;
-        printf("Zadales: %f punktow obrazen!\n", damage);
+        printf("Zadales: %d punktow obrazen!\n", damage);
         monsterTakeDamage(damage);
     }
     else{
-        printf("Zadales: %f punktow obrazen!\n", damage);
+        printf("Zadales: %d punktow obrazen!\n", damage);
         monsterTakeDamage(damage);
     }
 };
@@ -181,11 +182,11 @@ void playerDealDamage(){
     gets(fight);
 
     if(strcmp(fight, "atakuj") == 0){
-        printf("atakujesz mieczem\n");
+        printf("Atakujesz mieczem\n");
         playerPhysicAttack();
     }
     else if(strcmp(fight, "magia" ) == 0 && get_PlayerMana() >= 15){
-        printf("atakujesz magia\n");
+        printf("Atakujesz magia\n");
     }
     else if(strcmp(fight, "magia") == 0 && get_PlayerMana() < 15){
         printf("Nie masz many\n");
@@ -195,3 +196,50 @@ void playerDealDamage(){
         playerDealDamage();
     }
 }
+
+void Warrior(){
+    PlayerHealth += 50;
+    PlayerHealthMax += 50;
+    PlayerStrength += 5;
+}
+
+void Rogue(){
+    PlayerHealth -= 20;
+    PlayerHealthMax -= 20;
+    PlayerCrit += 5;
+}
+
+void Mage(){
+    PlayerHealth -= 30;
+    PlayerHealthMax -= 30;
+    PlayerMana += 30;
+    PlayerManaMax += 30;
+    PlayerIntelligence += 5;
+}
+
+void setClass(){
+    printf("Wybierz swoja klase (podaj odpowiednia cyfre)\n");
+    printf("1 - Wojownik\n2 - Lotr\n3 - Mag\n");
+    int chooseClass;
+    scanf("%d", &chooseClass);
+
+    switch(chooseClass){
+        case 1:
+            printf("Wybrales wojownika, powodzenia!\n");
+            Warrior();
+            break;
+        case 2:
+            printf("Wybrales lotra, powodzenia!\n");
+            Rogue();
+            break;
+        case 3:
+            printf("Wybrales maga, powodzenia!\n");
+            Mage();
+            break;
+        default:
+            printf("Sprobuj ponownie\n");
+            setClass();
+            break;
+    }
+}
+
