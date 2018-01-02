@@ -218,28 +218,25 @@ void Mage(){
 }
 
 void setClass(){
+    char choice[100];
+
     printf("Wybierz swoja klase (podaj odpowiednia cyfre)\n");
     printf("1 - Wojownik\n2 - Lotr\n3 - Mag\n");
-    int chooseClass;
-    scanf("%d", &chooseClass);
+    fgets(choice,100,stdin);
+    choice[strlen(choice)-1] = '\0';
 
-    switch(chooseClass){
-        case 1:
-            printf("Wybrales wojownika, powodzenia!\n");
-            Warrior();
-            break;
-        case 2:
-            printf("Wybrales lotra, powodzenia!\n");
-            Rogue();
-            break;
-        case 3:
-            printf("Wybrales maga, powodzenia!\n");
-            Mage();
-            break;
-        default:
-            printf("Sprobuj ponownie\n");
-            setClass();
-            break;
+    if(strcmp(choice, "1") == 0){
+        printf("Wybrales Wojownika, powodzenia!\n");
+    }
+    else if(strcmp(choice, "2") == 0){
+        printf("Wybrales Lotra, powodzenia!\n");
+    }
+    else if(strcmp(choice, "3") == 0){
+        printf("Wybrales maga, powodzenia!\n");
+    }
+    else{
+        printf("Wybierz jeszcze raz\n");
+        setClass();
     }
 }
 
