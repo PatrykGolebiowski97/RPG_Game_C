@@ -4,15 +4,17 @@
 
 #include <stdio.h>
 #include "Player.h"
-#include <mem.h>
+#include "Monster.h"
+#include "Fight.h"
 #include <stdlib.h>
+#include <string.h>
 
 
-static void Well(){
-    printf("Jestes na poluudniu");
+void Well(){
+    printf("Jestes na polnocy\n");
 }
 
-static void Camp(){
+void Camp(){
     char choice[30];
     gets(choice);
 
@@ -20,12 +22,17 @@ static void Camp(){
         Well();
     }
     else if(strcmp(choice, "idz na poludnie") == 0){
+        Zombie();
+        printf("Jestes na poludniu\n");
+        startBattle();
         Camp();
     }
     else if(strcmp(choice, "idz na wschod") == 0){
+        printf("Jestes na wschodzie\n");
         Camp();
     }
     else if(strcmp(choice, "idz na zachod") == 0){
+        printf("Jestes na zachodzie\n");
         Camp();
     }
     else if(strcmp(choice, "statystyki") == 0){

@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "Player.h"
-#include "Move.c"
+#include "Move.h"
 
 int main() {
     printf("Witaj w Gothic 8 nie arkania\n");
@@ -10,7 +9,7 @@ int main() {
     printf("ktora Cie oswobodzila.\n");
     printf("Co robisz?\n");
 
-    //Camp();
+    Camp();
 
     return 0;
 }

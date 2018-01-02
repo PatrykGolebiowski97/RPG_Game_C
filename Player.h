@@ -50,4 +50,8 @@ double get_PlayerAttackPower();
 
 void get_PlayerStats();
 
+void playerPhysicAttack();
+
+void playerDealDamage();
+
 #endif //GAMERPG_MODULE_H

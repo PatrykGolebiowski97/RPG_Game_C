@@ -1,41 +1,30 @@
 //
 // Created by Patryk on 01.01.2018.
 //
-#include "Player.h"
+
 #include <stdlib.h>
+#include <time.h>
+#include <stdio.h>
+#include "Player.h"
 
-static double RInt(double min, double max){
-    double scaled = (double)rand()/RAND_MAX;
-
-    return (max - min +1)*scaled + min;
+int RInt(int min, int max){
+    srand(time( NULL ));
+    return min + rand() % (max+1 - min);
 }
 
 
-
-
-static int Crit(){
-    int R = 100;
-    int C = (int)get_PlayerCrit();
-
-    int array[R];
-    int array1[C];
-
-    for(int b = 1; b < R; b++){
-        array[b] = b + 1;
+int Crit(){
+    int chance = RInt(1,get_PlayerCrit());
+    int possibilities = RInt(1, 100);
+    if (possibilities <= chance){
+        printf("cryt siadł, szansa: %d > możliwości: %d\n", chance, possibilities);
+        return 1;
     }
-
-    for (int b = 1; b < C; b++){
-        array1[b] = b + 1;
-    }
-
-    int x = (int)RInt(1, sizeof(array));
-
-    if (x <= C){
-        return 1; //Uderzenie krytyczne
-    }
-    else{
+    else {
+        printf("cryt nie siadł, szansa: %d < możliwości: %d\n", chance, possibilities);
         return 0;
     }
 }
+
 
 

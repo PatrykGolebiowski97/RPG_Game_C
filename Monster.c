@@ -2,6 +2,10 @@
 // Created by Patryk on 01.01.2018.
 //
 
+#include <stdio.h>
+#include "Player.h"
+#include "Random.h"
+
 static double MonsterHealth;
 static double MonsterHealthMax;
 static double MonsterMana;
@@ -11,12 +15,12 @@ static double MonsterDamageMax;
 static double MonsterSpeedAttack;
 static double MonsterMinMagicDmg;
 static double MonsterMaxMagicDmg;
-static double MonsterCoinDropMin;
-static double MonsterCoinDropMax;
-static double MonsterExpMin;
-static double MonsterExpMax;
+static int MonsterCoinDropMin;
+static int MonsterCoinDropMax;
+static int MonsterExpMin;
+static int MonsterExpMax;
 static int MonsterLevel;
-static char MonsterNameOfTheMonster;
+static char *MonsterNameOfTheMonster;
 static double MonsterDeffence;
 static double MonsterResistance;
 
@@ -45,21 +49,21 @@ void set_MonsterMagicDamage(double min, double max){
     MonsterMaxMagicDmg = max;
 }
 
-void set_MonsterCoinDrop(double min, double max){
+void set_MonsterCoinDrop(int min, int max){
     MonsterCoinDropMin = min;
     MonsterCoinDropMax = max;
 }
 
-void set_MonsterExp(double min, double max){
+void set_MonsterExp(int min, int max){
     MonsterExpMin = min;
     MonsterExpMax = max;
 }
 
-void set_MonsterLevel(double level){
+void set_MonsterLevel(int level){
     MonsterLevel = level;
 }
 
-void set_MonsterNameOfTheMonster(char name){
+void set_MonsterNameOfTheMonster(char *name){
     MonsterNameOfTheMonster = name;
 }
 
@@ -108,28 +112,28 @@ double get_MonsterMaxMagicDmg(){
     return MonsterMaxMagicDmg;
 }
 
-double get_MonsterCoinDropMin(){
+int get_MonsterCoinDropMin(){
     return MonsterCoinDropMin;
 }
 
-double get_MonsterCoinDropMax(){
+int get_MonsterCoinDropMax(){
     return MonsterCoinDropMax;
 }
 
-double get_MonsterExpMin(){
+int get_MonsterExpMin(){
     return MonsterExpMin;
 }
 
-double get_MonsterExpMax(){
+int get_MonsterExpMax(){
     return MonsterExpMax;
 }
 
-double get_MonsterLevel(){
+int get_MonsterLevel(){
     return MonsterLevel;
 }
 
 char get_MonsterNameOfTheMonster(){
-    return MonsterNameOfTheMonster;
+    return *MonsterNameOfTheMonster;
 }
 
 double get_MonsterDeffence(){
@@ -140,23 +144,43 @@ double get_MonsterResistance(){
     return MonsterResistance;
 }
 
+void die(){
+    int coin = RInt(MonsterCoinDropMin, MonsterCoinDropMax);
+    int exp = RInt(MonsterExpMin, MonsterExpMax);
 
-Monster(double health, double healthMax, double mana, double manaMax, double damageMin, double damageMax, double speedAttack, double minMagicDmg, double maxMagicDmg, double coinDropMin, double coinDropMax, double expMin, double expMax, int level, char nameOfTheMonster, double deffence, double resistance){
-    health = MonsterHealth;
-    healthMax = MonsterHealthMax;
-    mana = MonsterMana;
-    manaMax = MonsterManaMax;
-    damageMin = MonsterDamageMin;
-    damageMax = MonsterDamageMax;
-    speedAttack = MonsterSpeedAttack;
-    minMagicDmg = MonsterMinMagicDmg;
-    maxMagicDmg = MonsterMaxMagicDmg;
-    coinDropMin = MonsterCoinDropMin;
-    coinDropMax = MonsterCoinDropMax;
-    expMin = MonsterExpMin;
-    expMax = MonsterExpMax;
-    level = MonsterLevel;
-    nameOfTheMonster = MonsterNameOfTheMonster;
-    deffence = MonsterDeffence;
-    resistance = MonsterResistance;
+    printf("Pokonales przeciwnika, otrzymujesz: %d pieniedzy i %d punktow doswiadczenian\n", coin, exp);
+    set_PlayerMoney(coin);
+    set_PlayerExp(exp);
+}
+
+int monsterTakeDamage(double damage){
+    MonsterHealth -= damage;
+    printf("%c ma teraz: %f / %f punktow zycia\n", *MonsterNameOfTheMonster, MonsterHealth, MonsterHealthMax);
+    if (MonsterHealth < 0){
+        die();
+        return 1;
+    }
+    else{
+        return 0;
+    }
+}
+
+void monsterPhysicAttack(double damageMin, double damageMax){
+    double damage = RInt((int)damageMin, (int)damageMax);
+    printf("%c zadal Ci: %f punktow obrazen!\n", *MonsterNameOfTheMonster, damage);
+    set_PlayerHealth(get_PlayerHealth() - damage, get_PlayerHealthMax());
+}
+
+void Zombie(){
+    set_MonsterHealth(75, 75);
+    set_MonsterMana(30, 30);
+    set_MonsterDamage(10, 20);
+    set_MonsterSpeedAttack(1.0);
+    set_MonsterMagicDamage(5, 15);
+    set_MonsterCoinDrop(5, 10);
+    set_MonsterExp(10, 20);
+    set_MonsterLevel(1);
+    set_MonsterNameOfTheMonster("Zombie");
+    set_MonsterDeffence(5);
+    set_MonsterResistance(5);
 }

@@ -4,6 +4,9 @@
 
 
 #include <stdio.h>
+#include <string.h>
+#include "Random.h"
+#include "Monster.h"
 
 static double PlayerHealth = 100;
 static double PlayerHealthMax = 100;
@@ -156,4 +159,39 @@ void get_PlayerStats(){
     printf("Witalnosc: %.2f\n", PlayerVitality);
     printf("Sila: %.2f\n", PlayerStrength);
     printf("Szansa na uderzenie krytyczne: %.2f\n", PlayerCrit);
+}
+
+void playerPhysicAttack(){
+    double damage = PlayerAttack * PlayerStrength;
+
+    if(Crit() == 1){
+        damage *= 2;
+        printf("Zadales: %f punktow obrazen!\n", damage);
+        monsterTakeDamage(damage);
+    }
+    else{
+        printf("Zadales: %f punktow obrazen!\n", damage);
+        monsterTakeDamage(damage);
+    }
+};
+
+void playerDealDamage(){
+    printf("Co chcesz teraz zrobic?\n");
+    char fight[15];
+    gets(fight);
+
+    if(strcmp(fight, "atakuj") == 0){
+        printf("atakujesz mieczem\n");
+        playerPhysicAttack();
+    }
+    else if(strcmp(fight, "magia" ) == 0 && get_PlayerMana() >= 15){
+        printf("atakujesz magia\n");
+    }
+    else if(strcmp(fight, "magia") == 0 && get_PlayerMana() < 15){
+        printf("Nie masz many\n");
+    }
+    else{
+        printf("Zla komenda\n");
+        playerDealDamage();
+    }
 }
