@@ -15,17 +15,32 @@ void continueBattle(){
     double attack = RInt(1, 2);
 
     if (get_MonsterHealth() > 0 && get_PlayerHealth() > 0){
-        playerDealDamage();
-        if (get_MonsterHealth() > 0){
-            if (attack == 1 && get_MonsterMana() > 15 ){
-                printf("Atak magia\n");
+        if(get_PlayerSpeedAttack() >= get_MonsterSpeedAttack() ){
+            playerDealDamage();
+            if (get_MonsterHealth() > 0){
+                if (attack == 1 && get_MonsterMana() > 15 ){
+                    printf("Monster - Atak magia\n");
+                }
+                else{
+                    monsterPhysicAttack(get_MonsterDamageMin(), get_MonsterDamageMax());
+                }
             }
-            else{
-                monsterPhysicAttack(get_MonsterDamageMin(), get_MonsterDamageMax());
-            }
+            printf("-------------------------------------------------------------\n");
+            continueBattle();
         }
-        printf("-------------------------------------------------------------\n");
-        continueBattle();
+        else{
+            if (get_MonsterHealth() > 0){
+                if (attack == 1 && get_MonsterMana() > 15 ){
+                    printf("Monster - Atak magia\n");
+                }
+                else{
+                    monsterPhysicAttack(get_MonsterDamageMin(), get_MonsterDamageMax());
+                }
+            }
+            printf("-------------------------------------------------------------\n");
+            playerDealDamage();
+            continueBattle();
+        }
     }
     else{
         endFight();

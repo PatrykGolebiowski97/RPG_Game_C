@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Random.h"
 
+//MONSTER
 static int MonsterHealth;
 static int MonsterHealthMax;
 static int MonsterMana;
@@ -144,6 +145,7 @@ int get_MonsterResistance(){
     return MonsterResistance;
 }
 
+//METHODS
 void die(){
     int coin = RInt(MonsterCoinDropMin, MonsterCoinDropMax);
     int exp = RInt(MonsterExpMin, MonsterExpMax);
@@ -167,19 +169,23 @@ int monsterTakeDamage(int damage){
 
 void monsterPhysicAttack(int damageMin, int damageMax){
     int damage = RInt(damageMin, damageMax);
-    printf("%s zadal Ci: %d punktow obrazen!\n", MonsterNameOfTheMonster, damage);
-    set_PlayerHealth(get_PlayerHealth() - damage, get_PlayerHealthMax());
+    playerTakeDamage(damage);
 }
 
 void Zombie(){
     set_MonsterHealth(75, 75);
     set_MonsterMana(30, 30);
     set_MonsterDamage(10, 20);
-    set_MonsterSpeedAttack(1.0);
+    set_MonsterSpeedAttack(1.1);
     set_MonsterMagicDamage(5, 15);
     set_MonsterCoinDrop(5, 10);
-    set_MonsterExp(10, 20);
-    set_MonsterLevel(1);
+    set_MonsterExp(100, 120);
+    if( get_PlayerLevel() != 3 ){
+        set_MonsterLevel( RInt(get_PlayerLevel() - 2, get_PlayerLevel() + 3) );
+    }
+    else{
+        set_MonsterLevel( get_PlayerLevel() );
+    }
     set_MonsterNameOfTheMonster("Zombie");
     set_MonsterDeffence(5);
     set_MonsterResistance(5);

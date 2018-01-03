@@ -46,7 +46,15 @@ int get_PlayerStrength();
 void set_PlayerCrit(int addCrit);
 int get_PlayerCrit();
 
-double get_PlayerAttackPower();
+int get_PlayerAttackPower();
+
+void set_PlayerClass(int setClass);
+int get_PlayerClass();
+
+//METHODS
+void playerDie();
+
+void playerTakeDamage(int damage);
 
 void get_PlayerStats();
 
@@ -54,6 +62,11 @@ void playerPhysicAttack();
 
 void playerDealDamage();
 
+void playerMagicAttack();
+
+void playerLevelUp();
+
+//PLAYER CLASS
 void Warrior();
 
 void Rogue();

@@ -5,10 +5,12 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "Random.h"
 #include "Monster.h"
-#include "Move.h"
+#include "HeroMagic.h"
 
+//PLAYER
 static int PlayerHealth = 100;
 static int PlayerHealthMax = 100;
 static int PlayerMana = 30;
@@ -24,6 +26,10 @@ static int PlayerIntelligence = 5;
 static int PlayerVitality = 5;
 static int PlayerStrength = 5;
 static int PlayerCrit = 1;
+static int PlayerClass; //1 - Warrior, 2 - Rogue, 3 - Mage
+
+//OTHERS
+char fight[100];
 
 //SETTERS
 void set_PlayerHealth(int current, int max){
@@ -54,10 +60,12 @@ void set_PlayerMoney(int addMoney){
 
 void set_PlayerLevel(int addLevel){
     PlayerLevel += addLevel;
-}
+
+} //Dodać zwiększanie podstawowych atrybutów
 
 void set_PlayerExp(int addExp){
     PlayerExp += addExp;
+    playerLevelUp();
 }
 
 void set_PlayerAgility(int addAgility){
@@ -78,6 +86,10 @@ void set_PlayerStrength(int addStrength){
 
 void set_PlayerCrit(int addCrit){
     PlayerCrit += addCrit;
+}
+
+void set_PlayerClass(int setClass){
+    PlayerClass = setClass;
 }
 
 //GETTERS
@@ -142,7 +154,7 @@ double get_PlayerCrit(){
 }
 
 int get_PlayerAttackPower(){
-    return PlayerAttack * PlayerStrength;
+    return RInt( (PlayerAttack * PlayerStrength) * 3/4, (PlayerAttack * PlayerStrength) );
 }
 
 void get_PlayerStats(){
@@ -162,8 +174,27 @@ void get_PlayerStats(){
     printf("Szansa na uderzenie krytyczne: %d\n", PlayerCrit);
 }
 
+int get_PlayerClass(){
+    return PlayerClass;
+}
+
+//METHODS
+void playerDie(){
+    printf("Zostałeś pokonany, koniec gry!\n");
+    exit(0);
+}
+
+void playerTakeDamage(int damage){
+    PlayerHealth -= damage;
+    printf("%s zadal Ci: %d punktow obrazen!\n", get_MonsterNameOfTheMonster(), damage);
+    printf("Twoje zdrowie wynosi teraz: %d / %d\n", PlayerHealth, PlayerHealthMax);
+    if (PlayerHealth < 0){
+        playerDie();
+    }
+}
+
 void playerPhysicAttack(){
-    int damage = PlayerAttack * PlayerStrength;
+    int damage = RInt( (PlayerAttack * PlayerStrength) * 3/4, (PlayerAttack * PlayerStrength) );
 
     if(Crit() == 1){
         damage *= 2;
@@ -178,18 +209,19 @@ void playerPhysicAttack(){
 
 void playerDealDamage(){
     printf("Co chcesz teraz zrobic?\n");
-    char fight[15];
-    gets(fight);
+    fgets(fight,100,stdin);
+    fight[strlen(fight)-1] = '\0';
 
     if(strcmp(fight, "atakuj") == 0){
         printf("Atakujesz mieczem\n");
         playerPhysicAttack();
     }
     else if(strcmp(fight, "magia" ) == 0 && get_PlayerMana() >= 15){
-        printf("Atakujesz magia\n");
+        playerMagicAttack();
     }
     else if(strcmp(fight, "magia") == 0 && get_PlayerMana() < 15){
         printf("Nie masz many\n");
+        playerDealDamage();
     }
     else{
         printf("Zla komenda\n");
@@ -197,16 +229,58 @@ void playerDealDamage(){
     }
 }
 
+void playerMagicAttack(){
+    printf("Jakiego zaklęcia chciałbyś użyć?\n");
+    fgets(fight,100,stdin);
+    fight[strlen(fight)-1] = '\0';
+
+    if (strcmp(fight, "kula ognia") == 0){
+        playerUseFireBall();
+    }
+    else if (strcmp(fight, "lodowy szpikulec") == 0){
+        playerUseIceSpike();
+    }
+    else if (strcmp(fight, "uleczenie") == 0){
+        playerUseHeal();
+    }
+    else if (strcmp(fight, "kradziez zycia") == 0){
+        playerUseStealHealth();
+    }
+    else if (strcmp(fight, "wzmocniony atak") == 0){
+        playerUseReinforcedAttack();
+    }
+    else if (strcmp(fight, "pomoc") == 0){
+        printf("Dostępne komendy to: kula ognia, lodowy szpikulec, uleczenie, kradziez zycia, wzmocniony atak\n");
+    }
+    else{
+        printf("Podałeś złą komendę, spróbuj ponownie\n");
+        playerDealDamage();
+    }
+}
+
+void playerLevelUp(){
+    if (PlayerExp > 100){
+        set_PlayerLevel(1);
+    }
+    else if (PlayerExp > 100 && PlayerExp < 200){
+        set_PlayerLevel(2);
+    }
+}
+
+//PLAYER CLASS
 void Warrior(){
     PlayerHealth += 50;
     PlayerHealthMax += 50;
     PlayerStrength += 5;
+    PlayerClass = 1;
 }
 
 void Rogue(){
     PlayerHealth -= 20;
     PlayerHealthMax -= 20;
     PlayerCrit += 5;
+    PlayerSpeedAttack += 0.2;
+    PlayerClass = 2;
 }
 
 void Mage(){
@@ -215,6 +289,7 @@ void Mage(){
     PlayerMana += 30;
     PlayerManaMax += 30;
     PlayerIntelligence += 5;
+    PlayerClass = 3;
 }
 
 void setClass(){
@@ -227,16 +302,18 @@ void setClass(){
 
     if(strcmp(choice, "1") == 0){
         printf("Wybrales Wojownika, powodzenia!\n");
+        Warrior();
     }
     else if(strcmp(choice, "2") == 0){
         printf("Wybrales Lotra, powodzenia!\n");
+        Rogue();
     }
     else if(strcmp(choice, "3") == 0){
         printf("Wybrales maga, powodzenia!\n");
+        Mage();
     }
     else{
         printf("Wybierz jeszcze raz\n");
         setClass();
     }
 }
-

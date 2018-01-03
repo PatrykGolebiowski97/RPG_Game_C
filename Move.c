@@ -42,7 +42,7 @@ void Camp(){
         Camp();
     }
     else if(strcmp(choice, "koniec") == 0){
-        EXIT_SUCCESS;
+        exit(0);
     }
     else{
         printf("Niepoprawna komenda\n");
