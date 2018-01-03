@@ -17,3 +17,10 @@ int main() {
     return 0;
 }
 
+//Zrobić deffence i resistance
+//Dokończyć mapkę
+//Ogarnąć usuwanie przeciwników po ich pokonaniu
+//Stworzyć więcej przecwników + bossów
+//Zrobić sklep
+//Zrobić ekwipunek
+

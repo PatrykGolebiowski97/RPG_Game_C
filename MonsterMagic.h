@@ -5,4 +5,16 @@
 #ifndef GAMERPG_MONSTERMAGIC_H
 #define GAMERPG_MONSTERMAGIC_H
 
+void monsterUseFireBall();
+
+void monsterUseIceSpike();
+
+void monsterUseHeal();
+
+void monsterUseStealHealth();
+
+void monsterUseReinforcedAttack();
+
+void monsterUseMagic();
+
 #endif //GAMERPG_MONSTERMAGIC_H

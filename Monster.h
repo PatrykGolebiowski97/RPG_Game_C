@@ -50,6 +50,8 @@ int monsterTakeDamage(int damage);
 
 void monsterPhysicAttack(int damageMin, int damageMax);
 
+void monsterMagicAttack();
+
 void Zombie();
 
 

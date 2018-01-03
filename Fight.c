@@ -19,7 +19,7 @@ void continueBattle(){
             playerDealDamage();
             if (get_MonsterHealth() > 0){
                 if (attack == 1 && get_MonsterMana() > 15 ){
-                    printf("Monster - Atak magia\n");
+                    monsterMagicAttack();
                 }
                 else{
                     monsterPhysicAttack(get_MonsterDamageMin(), get_MonsterDamageMax());
@@ -31,7 +31,7 @@ void continueBattle(){
         else{
             if (get_MonsterHealth() > 0){
                 if (attack == 1 && get_MonsterMana() > 15 ){
-                    printf("Monster - Atak magia\n");
+                    monsterPhysicAttack(get_MonsterDamageMin(), get_MonsterDamageMax());
                 }
                 else{
                     monsterPhysicAttack(get_MonsterDamageMin(), get_MonsterDamageMax());
