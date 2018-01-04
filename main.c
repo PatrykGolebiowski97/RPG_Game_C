@@ -10,7 +10,6 @@ int main() {
     printf("Byles jencem wojennym a obozowisko Twoich wrogow zostalo zaatakowane.\n");
     printf("Budzisz sie rano i jedyne co pamietasz to tajemnicza postac w kapturze,\n");
     printf("ktora Cie oswobodzila.\n");
-    printf("Co robisz?\n");
 
     Camp();
 

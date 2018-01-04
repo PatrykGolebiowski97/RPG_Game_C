@@ -25,9 +25,6 @@ int get_PlayerResistance();
 void set_PlayerAttack(int addAttack);
 int get_PlayerAttack();
 
-void set_PlayerMoney(int addMoney);
-int get_PlayerMoney();
-
 void set_PlayerLevel(int addLevel);
 int get_PlayerLevel();
 

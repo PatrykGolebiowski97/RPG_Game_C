@@ -9,6 +9,7 @@
 
 void endFight(){
     printf("Koniec walki\n");
+    printf("-------------------------------------------------------------\n");
 }
 
 void continueBattle(){

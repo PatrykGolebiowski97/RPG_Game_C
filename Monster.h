@@ -24,10 +24,6 @@ void set_MonsterMagicDamage(int min, int max);
 int get_MonsterMinMagicDmg();
 int get_MonsterMaxMagicDmg();
 
-void set_MonsterCoinDrop(int min, int max);
-int get_MonsterCoinDropMin();
-int get_MonsterCoinDropMax();
-
 void set_MonsterExp(int min, int max);
 int get_MonsterExpMin();
 int get_MonsterExpMax();
@@ -54,5 +50,7 @@ void monsterMagicAttack();
 
 void Zombie();
 
+void Wolf();
 
+void Bear();
 #endif //GAMERPG_MONSTER_H

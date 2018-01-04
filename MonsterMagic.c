@@ -16,7 +16,6 @@ void monsterUseFireBall(){
     monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() ) / (get_PlayerResistance() * 1/5);
 
     printf( "%s użył Kuli Ognia!\n", get_MonsterNameOfTheMonster() );
-    //printf("Obrazenia: %d", monsterSpellDamage);
     playerTakeDamage(monsterSpellDamage);
     set_MonsterMana( get_MonsterMana() - monsterRequiredMana, get_MonsterManaMax() );
 }

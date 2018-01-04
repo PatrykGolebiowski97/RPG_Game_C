@@ -19,7 +19,6 @@ static double PlayerSpeedAttack = 1.0;
 static int PlayerDeffence = 5;
 static int PlayerResistance = 5;
 static int PlayerAttack = 5;
-static int PlayerMoney = 0;
 static int PlayerLevel = 1;
 static int PlayerExp = 0;
 static int PlayerAgility = 5;
@@ -56,10 +55,6 @@ void set_PlayerResistance(int addResistance){
 
 void set_PlayerAttack(int addAttack){
     PlayerAttack += addAttack;
-}
-
-void set_PlayerMoney(int addMoney){
-    PlayerMoney += addMoney;
 }
 
 void set_PlayerLevel(int addLevel){
@@ -147,10 +142,6 @@ int get_PlayerResistance(){
 
 int get_PlayerAttack(){
     return PlayerAttack;
-}
-
-int get_PlayerMoney(){
-    return PlayerMoney;
 }
 
 int get_PlayerLevel() {

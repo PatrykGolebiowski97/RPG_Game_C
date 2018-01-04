@@ -17,12 +17,12 @@ int Crit(){
     int chance = RInt( 1, get_PlayerCrit() );
     int possibilities = RInt( 1, 100 );
     if ( possibilities <= chance ){
-        //Musi wylosować przedział liczbowy większy od possibilities
-        printf( "Krytyk siadł, szansa: %d > możliwości: %d\n", chance, possibilities );
+        /*Musi wylosować liczbę chance większą niż possibilities, żeby było trafienie krytyczne.
+         */
+
         return 1;
     }
     else {
-        printf( "Krytyk nie siadł, szansa: %d < możliwości: %d\n", chance, possibilities );
         return 0;
     }
 }
