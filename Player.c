@@ -17,13 +17,13 @@ static int PlayerMana = 30;
 static int PlayerManaMax = 30;
 static double PlayerSpeedAttack = 1.0;
 static int PlayerDeffence = 5;
+static int PlayerResistance = 5;
 static int PlayerAttack = 5;
 static int PlayerMoney = 0;
 static int PlayerLevel = 1;
 static int PlayerExp = 0;
 static int PlayerAgility = 5;
 static int PlayerIntelligence = 5;
-static int PlayerVitality = 5;
 static int PlayerStrength = 5;
 static int PlayerCrit = 1;
 static int PlayerClass; //1 - Warrior, 2 - Rogue, 3 - Mage
@@ -50,6 +50,10 @@ void set_PlayerDeffence(int addDefence){
     PlayerDeffence += addDefence;
 }
 
+void set_PlayerResistance(int addResistance){
+    PlayerResistance += addResistance;
+}
+
 void set_PlayerAttack(int addAttack){
     PlayerAttack += addAttack;
 }
@@ -60,6 +64,30 @@ void set_PlayerMoney(int addMoney){
 
 void set_PlayerLevel(int addLevel){
     PlayerLevel += addLevel;
+    printf("Gratulacje! Awansowałeś, masz teraz %d poziom. Twoje statystyki wzrosły.\n", PlayerLevel);
+    if (PlayerClass == 1){
+        PlayerHealth += 20;
+        PlayerHealthMax += 20;
+        PlayerSpeedAttack += 0.05;
+        PlayerDeffence += 2;
+        PlayerAttack += 2;
+        PlayerStrength += 1;
+    }
+    else if(PlayerClass == 2){
+        PlayerHealth += 10;
+        PlayerHealthMax += 10;
+        PlayerSpeedAttack += 0.1;
+        PlayerAttack += 1;
+        PlayerAgility += 1;
+        PlayerCrit += 3;
+    }
+    else{
+        PlayerHealth += 10;
+        PlayerHealthMax += 10;
+        PlayerAttack += 1;
+        PlayerResistance += 2;
+        PlayerIntelligence += 3;
+    }
 
 } //Dodać zwiększanie podstawowych atrybutów
 
@@ -74,10 +102,6 @@ void set_PlayerAgility(int addAgility){
 
 void set_PlayerIntelligence(int addInteligence){
     PlayerIntelligence += addInteligence;
-}
-
-void set_PlayerVitality(int addVitality){
-    PlayerVitality += addVitality;
 }
 
 void set_PlayerStrength(int addStrength){
@@ -117,6 +141,10 @@ int get_PlayerDeffence(){
     return PlayerDeffence;
 }
 
+int get_PlayerResistance(){
+    return PlayerResistance;
+}
+
 int get_PlayerAttack(){
     return PlayerAttack;
 }
@@ -141,16 +169,12 @@ int get_PlayerIntelligence(){
     return PlayerIntelligence;
 }
 
-int get_PlayerVitality(){
-    return PlayerVitality;
-}
-
 int get_PlayerStrength(){
     return PlayerStrength;
 }
 
-double get_PlayerCrit(){
-    return PlayerCrit;
+int get_PlayerCrit(){
+    return PlayerCrit + (PlayerCrit * (PlayerAgility * 1/2));
 }
 
 int get_PlayerAttackPower(){
@@ -169,9 +193,8 @@ void get_PlayerStats(){
     printf("Exp: %d\n", PlayerExp);
     printf("Zrecznosc: %d\n", PlayerAgility);
     printf("Inteligencja: %d\n", PlayerIntelligence);
-    printf("Witalnosc: %d\n", PlayerVitality);
     printf("Sila: %d\n", PlayerStrength);
-    printf("Szansa na uderzenie krytyczne: %d\n", PlayerCrit);
+    printf("Szansa na uderzenie krytyczne: %d\n", get_PlayerCrit());
 }
 
 int get_PlayerClass(){
@@ -186,7 +209,7 @@ void playerDie(){
 
 void playerTakeDamage(int damage){
     PlayerHealth -= damage;
-    printf("%s zadal Ci: %d punktow obrazen!\n", get_MonsterNameOfTheMonster(), damage);
+    printf("%s zadał Ci: %d punktów obrażeń!\n", get_MonsterNameOfTheMonster(), damage);
     printf("Twoje zdrowie wynosi teraz: %d / %d\n", PlayerHealth, PlayerHealthMax);
     if (PlayerHealth < 0){
         playerDie();
@@ -194,15 +217,15 @@ void playerTakeDamage(int damage){
 }
 
 void playerPhysicAttack(){
-    int damage = RInt( (PlayerAttack * PlayerStrength) * 3/4, (PlayerAttack * PlayerStrength) );
+    int damage = RInt( (PlayerAttack * PlayerStrength) * 3/4, (PlayerAttack * PlayerStrength) ) / ( get_MonsterDeffence() * 7/20);
 
     if(Crit() == 1){
         damage *= 2;
-        printf("Zadales: %d punktow obrazen!\n", damage);
+        printf("Zadałeś: %d punktów obrażeń!\n", damage);
         monsterTakeDamage(damage);
     }
     else{
-        printf("Zadales: %d punktow obrazen!\n", damage);
+        printf("Zadałeś: %d punktów obrażeń!\n", damage);
         monsterTakeDamage(damage);
     }
 };
@@ -224,7 +247,7 @@ void playerDealDamage(){
         playerDealDamage();
     }
     else{
-        printf("Zla komenda\n");
+        printf("Zła komenda\n");
         playerDealDamage();
     }
 }

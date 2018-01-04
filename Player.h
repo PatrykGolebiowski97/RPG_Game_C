@@ -19,6 +19,9 @@ double get_PlayerSpeedAttack();
 void set_PlayerDeffence(int addDefence);
 int get_PlayerDeffence();
 
+void set_PlayerResistance(int addResistance);
+int get_PlayerResistance();
+
 void set_PlayerAttack(int addAttack);
 int get_PlayerAttack();
 
@@ -36,9 +39,6 @@ int get_PlayerAgility();
 
 void set_PlayerIntelligence(int addInteligence);
 int get_PlayerIntelligence();
-
-void set_PlayerVitality(int addVitality);
-int get_PlayerVitality();
 
 void set_PlayerStrength(int addStrength);
 int get_PlayerStrength();

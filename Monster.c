@@ -169,7 +169,7 @@ int monsterTakeDamage(int damage){
 }
 
 void monsterPhysicAttack(int damageMin, int damageMax){
-    int damage = RInt(damageMin, damageMax);
+    int damage = RInt(damageMin, damageMax) / (get_PlayerDeffence() * 7/20);
     playerTakeDamage(damage);
 }
 
@@ -177,27 +177,24 @@ void monsterMagicAttack(){
     monsterUseMagic();
 }
 
-void Zombie(){
-    MonsterHealth = 75;
-    MonsterHealthMax = 75;
+void Zombie() {
+    int random = 1;
+    if (get_PlayerLevel() > 3)
+        random = RInt(2, 3);
+
+    MonsterHealth = 75 * get_PlayerLevel() * random;
+    MonsterHealthMax = 75 * get_PlayerLevel() * random;
     MonsterMana = 30;
     MonsterManaMax = 30;
-    MonsterDamageMin = 10;
-    MonsterDamageMax = 20;
-    MonsterMinMagicDmg = 5;
-    MonsterMaxMagicDmg = 10;
+    MonsterDamageMin = 10 * get_PlayerLevel();
+    MonsterDamageMax = 20 * get_PlayerLevel();
+    MonsterMinMagicDmg = 5 * get_PlayerLevel();
+    MonsterMaxMagicDmg = 10 * get_PlayerLevel();
     MonsterSpeedAttack = 1.1;
-    printf("speedAttack: %f", MonsterSpeedAttack);
-    MonsterCoinDropMin = 5;
-    MonsterCoinDropMax = 10;
-    MonsterExpMin = 100;
-    MonsterExpMax = 200;
-    if( get_PlayerLevel() != 3 ){
-        set_MonsterLevel( RInt(get_PlayerLevel() - 2, get_PlayerLevel() + 3) );
-    }
-    else{
-        set_MonsterLevel( get_PlayerLevel() );
-    }
+    MonsterCoinDropMin = 5 * get_PlayerLevel();
+    MonsterCoinDropMax = 10 * get_PlayerLevel();
+    MonsterExpMin = 10;
+    MonsterExpMax = 50;
     MonsterNameOfTheMonster = "Zombie";
     MonsterDeffence = 5;
     MonsterResistance = 5;

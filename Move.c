@@ -44,6 +44,12 @@ void Camp(){
     else if(strcmp(choice, "koniec") == 0){
         exit(0);
     }
+    else if(strcmp(choice, "idz spac") == 0){
+        printf("Poszedłeś spać i odnowiłeś swoje zdrowie i mane\n");
+        set_PlayerMana(get_PlayerManaMax(), get_PlayerManaMax());
+        set_PlayerHealth(get_PlayerHealthMax(), get_PlayerHealthMax());
+        Camp();
+    }
     else{
         printf("Niepoprawna komenda\n");
         Camp();

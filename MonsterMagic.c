@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <string.h>
 #include "Monster.h"
 #include "Player.h"
 #include "Random.h"
@@ -12,7 +13,7 @@ int monsterSpellDamage;
 
 void monsterUseFireBall(){
     monsterRequiredMana = 20;
-    monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() );
+    monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() ) / (get_PlayerResistance() * 1/5);
 
     printf( "%s użył Kuli Ognia!\n", get_MonsterNameOfTheMonster() );
     //printf("Obrazenia: %d", monsterSpellDamage);
@@ -22,7 +23,7 @@ void monsterUseFireBall(){
 
 void monsterUseIceSpike(){
     monsterRequiredMana = 40;
-    monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() );
+    monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() ) / (get_PlayerResistance() * 1/5);
 
     printf( "%s użył Lodowego Szpikulca!\n", get_MonsterNameOfTheMonster(), monsterSpellDamage );
     playerTakeDamage(monsterSpellDamage);
@@ -31,7 +32,7 @@ void monsterUseIceSpike(){
 
 void monsterUseHeal(){
     monsterRequiredMana = 30;
-    monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() );
+    monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() ) / (get_PlayerResistance() * 1/5);
 
     if ( monsterSpellDamage >= get_MonsterHealthMax() - get_MonsterHealth() ){
         monsterSpellDamage = get_MonsterHealthMax() - get_MonsterHealth();
@@ -50,7 +51,7 @@ void monsterUseHeal(){
 
 void monsterUseStealHealth(){
     monsterRequiredMana = 15;
-    monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() );
+    monsterSpellDamage = get_MonsterLevel() * RInt( get_MonsterMinMagicDmg(), get_MonsterMaxMagicDmg() ) / (get_PlayerResistance() * 1/5);
 
     if ( monsterSpellDamage >= get_MonsterHealthMax() - get_MonsterHealth() ){
         monsterSpellDamage = monsterSpellDamage >= get_MonsterHealthMax() - get_MonsterHealth();
@@ -69,7 +70,7 @@ void monsterUseStealHealth(){
 
 void monsterUseReinforcedAttack(){
     monsterRequiredMana = 20;
-    monsterSpellDamage = RInt( get_MonsterDamageMin() * 3/2, get_MonsterDamageMax() * 2);
+    monsterSpellDamage = RInt( get_MonsterDamageMin() * 3/2, get_MonsterDamageMax() * 2) / (get_PlayerDeffence() * 7/20);
 
     set_MonsterMana( get_MonsterMana() - monsterRequiredMana, get_MonsterManaMax() );
 
@@ -90,7 +91,10 @@ void monsterUseMagic(){
             monsterUseFireBall();
         }
         else{
-            monsterUseHeal();
+            if (strcmp(get_MonsterNameOfTheMonster(), "Zombie") == 0)
+                monsterUseReinforcedAttack();
+            else
+                monsterUseHeal();
         }
     }
     else if( get_MonsterMana() >= 40){
@@ -100,7 +104,10 @@ void monsterUseMagic(){
             monsterUseFireBall();
         }
         else if( typeOfAttack == 2){
-            monsterUseHeal();
+            if (strcmp(get_MonsterNameOfTheMonster(), "Zombie") == 0)
+                monsterUseReinforcedAttack();
+            else
+                monsterUseHeal();
         }
         else{
             monsterUseIceSpike();
