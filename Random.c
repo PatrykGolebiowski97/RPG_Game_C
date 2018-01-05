@@ -12,7 +12,6 @@ int RInt(int min, int max){
     return min + rand() % (max+1 - min);
 }
 
-
 int Crit(){
     int chance = RInt( 1, get_PlayerCrit() );
     int possibilities = RInt( 1, 100 );

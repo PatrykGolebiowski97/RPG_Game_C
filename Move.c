@@ -20,7 +20,7 @@ int forestFight = 0; //(1) - Potwory będą atakować
 
 void Swamp(){
     if (clearSwamp == 1){
-        while (swampKill <= 100){
+        while (swampKill <= 10){
             Floater();
             startBattle();
             swampKill ++;

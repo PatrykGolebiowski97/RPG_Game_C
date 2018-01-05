@@ -19,7 +19,7 @@ static double PlayerSpeedAttack = 1.0;
 static int PlayerDeffence = 5;
 static int PlayerResistance = 5;
 static int PlayerAttack = 5;
-static int PlayerLevel = 5;
+static int PlayerLevel = 1;
 static int PlayerExp = 0;
 static int PlayerAgility = 5;
 static int PlayerIntelligence = 5;
@@ -283,7 +283,7 @@ void playerLevelUp(){
 }
 
 void playerMeditation() {
-    int statsUp = 6;//RInt(1, 10);
+    int statsUp = RInt(1, 10);
     if (statsUp >= 5 && statsUp <= 7) {
         printf("Poczasz medytacji udało Ci się podnieść poziom swoich umiejętnośći\n");
         if (get_PlayerClass() == 1) {
