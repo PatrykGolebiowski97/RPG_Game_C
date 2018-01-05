@@ -5,6 +5,14 @@
 #ifndef GAMERPG_MOVE_H
 #define GAMERPG_MOVE_H
 
+void Swamp();
+
+void City();
+
+void Castle();
+
+void Forest();
+
 void Well();
 
 void Camp();

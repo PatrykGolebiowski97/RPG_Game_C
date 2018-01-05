@@ -53,4 +53,10 @@ void Zombie();
 void Wolf();
 
 void Bear();
+
+void Floater();
+
+void Vampire();
+
+
 #endif //GAMERPG_MONSTER_H

@@ -13,9 +13,9 @@ void playerUseFireBall(){
     playerRequiredMana = 20;
 
     if (get_PlayerClass() == 3) //Sprawdza czy klasa postaci to mag
-        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1, get_PlayerLevel() * get_PlayerIntelligence() * 3 ) / (get_MonsterResistance() * 1/5);
+        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence(), get_PlayerLevel() * get_PlayerIntelligence() * 3 ) - (get_MonsterResistance() * 10);
     else
-        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1/2, get_PlayerLevel() * get_PlayerIntelligence() ) / (get_MonsterResistance() * 1/5);
+        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1/2, get_PlayerLevel() * get_PlayerIntelligence() ) - (get_MonsterResistance() * 10);
 
     if ( playerRequiredMana > get_PlayerMana() ){
         printf("Nie masz many na to zaklęcie!\nWymagana mana: %d, posiadasz %d\n", playerRequiredMana, get_PlayerMana());
@@ -29,13 +29,14 @@ void playerUseFireBall(){
     }
 }
 
-void playerUseIceSpike(){
+void playerUseIceSpike() {
     playerRequiredMana = 40;
 
-    if (get_PlayerClass() == 3) //Sprawdza czy klasa postaci to mag
-        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1, get_PlayerLevel() * get_PlayerIntelligence() * 3 ) / (get_MonsterResistance() * 1/5);
+    if (get_PlayerClass() == 3) { //Sprawdza czy klasa postaci to mag
+        playerSpellDamage = RInt(get_PlayerLevel() * get_PlayerIntelligence() * 2, get_PlayerLevel() * get_PlayerIntelligence() * 5) - (get_MonsterResistance() * 10);
+    }
     else
-        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1/2, get_PlayerLevel() * get_PlayerIntelligence() ) / (get_MonsterResistance() * 1/5);
+        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence(), get_PlayerLevel() * get_PlayerIntelligence() *2 ) - (get_MonsterResistance() * 10);
 
     if ( playerRequiredMana > get_PlayerMana() ){
         printf("Nie masz many na to zaklęcie!\nWymagana: %d, posiadasz %d\n", playerRequiredMana, get_PlayerMana());
@@ -53,9 +54,9 @@ void playerUseHeal(){
     playerRequiredMana = 30;
 
     if (get_PlayerClass() == 3) //Sprawdza czy klasa postaci to mag
-        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1, get_PlayerLevel() * get_PlayerIntelligence() * 3 );
+        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 2, get_PlayerLevel() * get_PlayerIntelligence() * 3 );
     else
-        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1/2, get_PlayerLevel() * get_PlayerIntelligence() );
+        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence(), get_PlayerLevel() * get_PlayerIntelligence() * 3/2);
 
     if ( playerRequiredMana > get_PlayerMana() ){
         printf("Nie masz many na to zaklęcie!\nWymagana: %d, posiadasz %d\n", playerRequiredMana, get_PlayerMana());
@@ -84,9 +85,9 @@ void playerUseStealHealth(){
     playerRequiredMana = 15;
 
     if (get_PlayerClass() == 2) //Sprawdza czy klasa postaci to łotr
-        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerAgility() * 3/2, get_PlayerLevel() * get_PlayerAgility() * 3 ) / (get_MonsterResistance() * 1/5);
+        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerAgility() * 3/2, get_PlayerLevel() * get_PlayerAgility() * 3 ) - (get_MonsterResistance() * 10);
     else
-        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1/2, get_PlayerLevel() * get_PlayerIntelligence() ) / (get_MonsterResistance() * 1/5);
+        playerSpellDamage = RInt( get_PlayerLevel() * get_PlayerIntelligence() * 1/2, get_PlayerLevel() * get_PlayerIntelligence() ) - (get_MonsterResistance() * 10);
 
     if ( playerRequiredMana > get_PlayerMana() ){
         printf("Nie masz many na to zaklęcie!\nWymagana: %d, posiadasz %d\n", playerRequiredMana, get_PlayerMana());
@@ -117,9 +118,9 @@ void playerUseReinforcedAttack(){
     playerRequiredMana = 30;
 
     if (get_PlayerClass() == 1) //Sprawdza czy klasa postaci to wojownik
-        playerSpellDamage = RInt( get_PlayerAttackPower() * 2, get_PlayerAttackPower() * 4 ) / (get_MonsterDeffence() * 7/20);
+        playerSpellDamage = RInt( get_PlayerAttackPower() * 2, get_PlayerAttackPower() * 4 ) - (get_MonsterDeffence() * 7/20);
     else
-        playerSpellDamage = RInt( get_PlayerAttackPower(), get_PlayerAttackPower() * 3/2) / (get_MonsterResistance() * 7/20);
+        playerSpellDamage = RInt( get_PlayerAttackPower(), get_PlayerAttackPower() * 2) - (get_MonsterDeffence() * 7/20);
 
     if ( playerRequiredMana > get_PlayerMana() ){
         printf("Nie masz many na to zaklęcie!\nWymagana: %d, posiadasz %d\n", playerRequiredMana, get_PlayerMana());

@@ -63,6 +63,8 @@ void playerMagicAttack();
 
 void playerLevelUp();
 
+void playerMeditation();
+
 //PLAYER CLASS
 void Warrior();
 

@@ -164,10 +164,9 @@ void Zombie() {
     MonsterNameOfTheMonster = "Zombie";
     MonsterDamageMin = 10 * get_PlayerLevel();
     MonsterDamageMax = 20 * get_PlayerLevel();
-    int random = 1;
     int elite = RInt(1, 7);
     if (get_PlayerLevel() > 3 && elite == 3){
-        random = RInt(2, 6);
+        int random = RInt(2, 6);
         MonsterNameOfTheMonster = "Potężne Zombie";
         MonsterDamageMin = 10 * get_PlayerLevel() * random;
         MonsterDamageMax = 20 * get_PlayerLevel() * random;
@@ -180,20 +179,19 @@ void Zombie() {
     MonsterMinMagicDmg = 5 * get_PlayerLevel();
     MonsterMaxMagicDmg = 10 * get_PlayerLevel();
     MonsterSpeedAttack = 1.1;
-    MonsterExpMin = 10 * random;
-    MonsterExpMax = 50 * random;
-    MonsterDeffence = 5 * random;
-    MonsterResistance = 5 * random;
+    MonsterExpMin = 10 * elite;
+    MonsterExpMax = 50 * elite;
+    MonsterDeffence = 5 * elite;
+    MonsterResistance = 5 * elite;
 }
 
 void Wolf(){
     MonsterNameOfTheMonster = "Wilk";
     MonsterDamageMin = 15 * get_PlayerLevel();
     MonsterDamageMax = 25 * get_PlayerLevel();
-    int random = 1;
     int elite = RInt(1, 7);
     if (get_PlayerLevel() > 3 && elite >= 3 && elite <= 5){
-        random = RInt(2, 6);
+        int random = RInt(2, 6);
         MonsterNameOfTheMonster = "Wilk Alfa";
         MonsterDamageMin = 10 * get_PlayerLevel() * random;
         MonsterDamageMax = 20 * get_PlayerLevel() * random;
@@ -208,24 +206,23 @@ void Wolf(){
     MonsterSpeedAttack = 1.5;
     MonsterExpMin = 20 * elite;
     MonsterExpMax = 60 * elite;
-    MonsterDeffence = 8 * random;
-    MonsterResistance = 3 * random;
+    MonsterDeffence = 8 * elite;
+    MonsterResistance = 3 * elite;
 }
 
 void Bear(){
     MonsterNameOfTheMonster = "Niedźwiedź";
     MonsterDamageMin = 15 * get_PlayerLevel();
     MonsterDamageMax = 25 * get_PlayerLevel();
-    int random = 1;
     int elite = RInt(1, 7);
     if (get_PlayerLevel() > 3 && elite >= 3 && elite <= 5){
-        random = RInt(2, 6);
+        int random = RInt(2, 6);
         MonsterNameOfTheMonster = "Niedźwiedź Grizli";
         MonsterDamageMin = 30 * get_PlayerLevel() * random;
         MonsterDamageMax = 36 * get_PlayerLevel() * random;
     }
     MonsterLevel = get_PlayerLevel();
-    MonsterHealth = 300 * get_PlayerLevel();
+    MonsterHealth = 350 * get_PlayerLevel();
     MonsterHealthMax = 350 * get_PlayerLevel();
     MonsterMana = 30;
     MonsterManaMax = 30;
@@ -234,6 +231,50 @@ void Bear(){
     MonsterSpeedAttack = 1.0;
     MonsterExpMin = 40 * elite;
     MonsterExpMax = 75 * elite;
-    MonsterDeffence = 10 * random;
-    MonsterResistance = 5 * random;
+    MonsterDeffence = 10 * elite;
+    MonsterResistance = 5 * elite;
+}
+
+void Floater(){
+    MonsterNameOfTheMonster = "Utopiec";
+    MonsterDamageMin = 7 * get_PlayerLevel();
+    MonsterDamageMax = 20 * get_PlayerLevel();
+    int elite = RInt(1, 7);
+    if (get_PlayerLevel() > 7 && (elite >= 3 && elite <= 5)){
+        int random = RInt(2, 6);
+        MonsterNameOfTheMonster = "Topielec";
+        MonsterDamageMin = 14 * get_PlayerLevel() * random;
+        MonsterDamageMax = 32 * get_PlayerLevel() * random;
+    }
+    MonsterLevel = get_PlayerLevel();
+    MonsterHealth = 319 * get_PlayerLevel();
+    MonsterHealthMax = 319 * get_PlayerLevel();
+    MonsterMana = 0;
+    MonsterManaMax = 0;
+    MonsterMinMagicDmg = 0 * get_PlayerLevel();
+    MonsterMaxMagicDmg = 0 * get_PlayerLevel();
+    MonsterSpeedAttack = 1.4;
+    MonsterExpMin = 44 * elite;
+    MonsterExpMax = 86 * elite;
+    MonsterDeffence = 7 * elite;
+    MonsterResistance = 0 * elite;
+}
+
+void Vampire(){
+    int elite = RInt(1, 7);
+    MonsterNameOfTheMonster = "Wampir";
+    MonsterDamageMin = 100 * get_PlayerLevel();
+    MonsterDamageMax =  200 * get_PlayerLevel();
+    MonsterLevel = get_PlayerLevel();
+    MonsterHealth = 780 * get_PlayerLevel();
+    MonsterHealthMax = 780 * get_PlayerLevel();
+    MonsterMana = 100;
+    MonsterManaMax = 100;
+    MonsterMinMagicDmg = 100 * get_PlayerLevel();
+    MonsterMaxMagicDmg = 200 * get_PlayerLevel();
+    MonsterSpeedAttack = 1.7;
+    MonsterExpMin = 100 * elite;
+    MonsterExpMax = 100 * elite;
+    MonsterDeffence = 100;
+    MonsterResistance = 140;
 }

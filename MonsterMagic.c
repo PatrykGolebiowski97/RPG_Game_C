@@ -92,6 +92,8 @@ void monsterUseMagic(){
         else{
             if (strcmp(get_MonsterNameOfTheMonster(), "Zombie") == 0)
                 monsterUseReinforcedAttack();
+            else if(strcmp(get_MonsterNameOfTheMonster(), "Wampir") == 0)
+                monsterUseStealHealth();
             else
                 monsterUseHeal();
         }
@@ -105,6 +107,8 @@ void monsterUseMagic(){
         else if( typeOfAttack == 2){
             if (strcmp(get_MonsterNameOfTheMonster(), "Zombie") == 0)
                 monsterUseReinforcedAttack();
+            else if(strcmp(get_MonsterNameOfTheMonster(), "Wampir") == 0)
+                monsterUseStealHealth();
             else
                 monsterUseHeal();
         }

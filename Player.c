@@ -19,7 +19,7 @@ static double PlayerSpeedAttack = 1.0;
 static int PlayerDeffence = 5;
 static int PlayerResistance = 5;
 static int PlayerAttack = 5;
-static int PlayerLevel = 1;
+static int PlayerLevel = 5;
 static int PlayerExp = 0;
 static int PlayerAgility = 5;
 static int PlayerIntelligence = 5;
@@ -165,7 +165,7 @@ int get_PlayerStrength(){
 }
 
 int get_PlayerCrit(){
-    return PlayerCrit + (PlayerCrit * (PlayerAgility * 1/2));
+    return PlayerCrit + (PlayerCrit + (PlayerAgility * 1/2));
 }
 
 int get_PlayerAttackPower(){
@@ -212,7 +212,7 @@ void playerPhysicAttack(){
 
     if(Crit() == 1){
         damage *= 2;
-        printf("Zadałeś: %d punktów obrażeń!\n", damage);
+        printf("Uderzenie krytyczne! Zadałeś: %d punktów obrażeń!\n", damage);
         monsterTakeDamage(damage);
     }
     else{
@@ -265,6 +265,7 @@ void playerMagicAttack(){
     }
     else if (strcmp(fight, "pomoc") == 0){
         printf("Dostępne komendy to: kula ognia, lodowy szpikulec, uleczenie, kradziez zycia, wzmocniony atak\n");
+        playerMagicAttack();
     }
     else{
         printf("Podałeś złą komendę, spróbuj ponownie\n");
@@ -281,53 +282,93 @@ void playerLevelUp(){
     }
 }
 
+void playerMeditation() {
+    int statsUp = 6;//RInt(1, 10);
+    if (statsUp >= 5 && statsUp <= 7) {
+        printf("Poczasz medytacji udało Ci się podnieść poziom swoich umiejętnośći\n");
+        if (get_PlayerClass() == 1) {
+            PlayerStrength += 3;
+            PlayerAgility += 2;
+            PlayerAgility += 1;
+            PlayerCrit += 1;
+            PlayerAttack += 1;
+            PlayerHealth += 50;
+            PlayerHealthMax += 50;
+            PlayerMana += 3;
+            PlayerManaMax += 3;
+            PlayerDeffence += 2;
+            PlayerResistance += 1;
+        } else if (get_PlayerClass() == 2) {
+            PlayerAttack += 1;
+            PlayerStrength += 2;
+            PlayerAgility += 3;
+            PlayerIntelligence += 1;
+            PlayerHealth += 30;
+            PlayerHealthMax += 30;
+            PlayerMana += 5;
+            PlayerManaMax += 5;
+            PlayerCrit += 3;
+            PlayerDeffence += 1;
+            PlayerResistance += 1;
+        } else {
+            PlayerIntelligence += 3;
+            PlayerAgility += 1;
+            PlayerStrength += 1;
+            PlayerAttack += 1;
+            PlayerMana += 15;
+            PlayerManaMax += 15;
+            PlayerHealth += 15;
+            PlayerHealthMax += 15;
+            PlayerResistance += 2;
+            PlayerDeffence += 1;
+        }
+    }
+}
+
 //PLAYER CLASS
-void Warrior(){
-    PlayerHealth += 50;
-    PlayerHealthMax += 50;
-    PlayerStrength += 5;
-    PlayerClass = 1;
-}
-
-void Rogue(){
-    PlayerHealth -= 20;
-    PlayerHealthMax -= 20;
-    PlayerCrit += 5;
-    PlayerSpeedAttack += 0.2;
-    PlayerClass = 2;
-}
-
-void Mage(){
-    PlayerHealth -= 30;
-    PlayerHealthMax -= 30;
-    PlayerMana += 30;
-    PlayerManaMax += 30;
-    PlayerIntelligence += 5;
-    PlayerClass = 3;
-}
-
-void setClass(){
-    char choice[100];
-
-    printf("Wybierz swoja klase (podaj odpowiednia cyfre)\n");
-    printf("1 - Wojownik\n2 - Lotr\n3 - Mag\n");
-    fgets(choice,100,stdin);
-    choice[strlen(choice)-1] = '\0';
-
-    if(strcmp(choice, "1") == 0){
-        printf("Wybrales Wojownika, powodzenia!\n");
-        Warrior();
+void Warrior() {
+        PlayerHealth += 50;
+        PlayerHealthMax += 50;
+        PlayerStrength += 5;
+        PlayerClass = 1;
     }
-    else if(strcmp(choice, "2") == 0){
-        printf("Wybrales Lotra, powodzenia!\n");
-        Rogue();
+
+void Rogue() {
+        PlayerHealth -= 20;
+        PlayerHealthMax -= 20;
+        PlayerCrit += 5;
+        PlayerSpeedAttack += 0.2;
+        PlayerClass = 2;
     }
-    else if(strcmp(choice, "3") == 0){
-        printf("Wybrales maga, powodzenia!\n");
-        Mage();
+
+void Mage() {
+        PlayerHealth -= 30;
+        PlayerHealthMax -= 30;
+        PlayerMana += 30;
+        PlayerManaMax += 30;
+        PlayerIntelligence += 5;
+        PlayerClass = 3;
     }
-    else{
-        printf("Wybierz jeszcze raz\n");
-        setClass();
+
+void setClass() {
+        char choice[100];
+
+        printf("Wybierz swoja klase (podaj odpowiednia cyfre)\n");
+        printf("1 - Wojownik\n2 - Lotr\n3 - Mag\n");
+        fgets(choice, 100, stdin);
+        choice[strlen(choice) - 1] = '\0';
+
+        if (strcmp(choice, "1") == 0) {
+            printf("Wybrales Wojownika, powodzenia!\n");
+            Warrior();
+        } else if (strcmp(choice, "2") == 0) {
+            printf("Wybrales Lotra, powodzenia!\n");
+            Rogue();
+        } else if (strcmp(choice, "3") == 0) {
+            printf("Wybrales maga, powodzenia!\n");
+            Mage();
+        } else {
+            printf("Wybierz jeszcze raz\n");
+            setClass();
+        }
     }
-}
