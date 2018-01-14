@@ -18,6 +18,10 @@ int swampKill = 0; //Zabite topielce
 int killVampire = 0; //EndGame Quest
 int forestFight = 0; //(1) - Potwory będą atakować
 
+void City();
+
+void Camp();
+
 void Swamp(){
     if (clearSwamp == 1){
         while (swampKill <= 10){
