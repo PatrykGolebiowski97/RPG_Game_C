@@ -4,7 +4,6 @@
 
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
 #include "Player.h"
 
 int RInt(int min, int max){

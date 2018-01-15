@@ -9,7 +9,7 @@ void set_MonsterHealth(int current, int max);
 int get_MonsterHealth();
 int get_MonsterHealthMax();
 
-void set_MonsterMana(int curent, int max);
+void set_MonsterMana(int current, int max);
 int get_MonsterMana();
 int get_MonsterManaMax();
 
@@ -37,7 +37,7 @@ char *get_MonsterNameOfTheMonster();
 void set_MonsterDeffence(int addDefence);
 int get_MonsterDeffence();
 
-void set_MonsterResistance(int addResistatnce);
+void set_MonsterResistance(int addResistance);
 int get_MonsterResistance();
 
 void die();

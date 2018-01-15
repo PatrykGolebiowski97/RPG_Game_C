@@ -128,7 +128,7 @@ int get_PlayerManaMax(){
     return PlayerManaMax;
 }
 
-int get_PlayerSpeedAttack(){
+double get_PlayerSpeedAttack(){
     return PlayerSpeedAttack;
 }
 
